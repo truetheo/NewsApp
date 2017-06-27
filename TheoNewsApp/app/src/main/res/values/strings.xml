@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">TheoNewsApp</string>
+    <string name="no_news">No news found.</string>
+    <string name="no_connection">Chech interent connecton.</string>
+    <string name="keywords_search">Type your keywords here.</string>
+    <string name="api_key">&amp;api-key=test</string>
+    <string name="news_settings_label">News settings</string>
+
+    <!-- Strings For Tag Preference [CHAR LIMIT=30] -->
+    <string name="settings_tags_label">Tags</string>
+    <string name="settings_tags_key" translatable="false">tag</string>
+    <string name="settings_tags_default" translatable="false"></string>
+</resources>
