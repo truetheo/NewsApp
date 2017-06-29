@@ -7,10 +7,14 @@ package com.example.magda.theonewsapp;
 public class News {
     private String title;
     private String sectionName;
+    private String webUrl;
+    private String webPublicationDate;
 
-    public News(String title, String sectionName) {
+    public News(String title, String sectionName, String webUrl, String webPublicationDate) {
         this.title = title;
         this.sectionName = sectionName;
+        this.webUrl = webUrl;
+        this.webPublicationDate = webPublicationDate;
     }
 
     public String getTitle() {
@@ -19,5 +23,13 @@ public class News {
 
     public String getSectionName() {
         return sectionName;
+    }
+
+    public String getWebUrl() {
+        return webUrl;
+    }
+
+    public String getWebPublicationDate() {
+        return webPublicationDate;
     }
 }

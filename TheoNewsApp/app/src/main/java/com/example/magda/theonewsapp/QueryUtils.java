@@ -47,6 +47,7 @@ public final class QueryUtils {
         // Return the list of {@link News}s
         return extractFeatureFromJson(jsonResponse);
     }
+
     /**
      * Returns new URL object from the given string URL.
      */
@@ -59,6 +60,7 @@ public final class QueryUtils {
         }
         return url;
     }
+
     /**
      * Make an HTTP request to the given URL and return a String as the response.
      */
@@ -102,6 +104,7 @@ public final class QueryUtils {
         }
         return jsonResponse;
     }
+
     /**
      * Convert the {@link InputStream} into a String which contains the
      * whole JSON response from the server.
@@ -119,6 +122,7 @@ public final class QueryUtils {
         }
         return output.toString();
     }
+
     /**
      * Return a list of {@link News} objects that has been built up from
      * parsing the given JSON response.
@@ -155,22 +159,38 @@ public final class QueryUtils {
                 // for that book.
                 String title;
                 if (currentNews.has("webTitle")) {
-                    // Extract the value for the key called "title"
+                    // Extract the value for the key called "webTitle"
                     title = currentNews.getString("webTitle");
 
-                } else{
+                } else {
                     title = "No title";
                 }
-                // Extract the Array for the key called "authors"
+                // Extract the Array for the key called "sectionName"
                 String sectionId;
                 if (currentNews.has("sectionName")) {
-                      sectionId = currentNews.getString("sectionName");
+                    sectionId = currentNews.getString("sectionName");
 
-                    } else {
+                } else {
                     sectionId = "section unknown";
                 }
+                String webUrl;
+                if (currentNews.has("webUrl")) {
+                    // Extract the value for the key called "webTitle"
+                    webUrl = currentNews.getString("webUrl");
+
+                } else {
+                    webUrl = "No webUrl";
+                }
+                String webPublicationDate;
+                if (currentNews.has("webPublicationDate")) {
+                    // Extract the value for the key called "webTitle"
+                    webPublicationDate = currentNews.getString("webPublicationDate");
+
+                } else {
+                    webPublicationDate = "No webPublicationDate";
+                }
                 // Create a new {@link GoogleBook} object with the title, author.
-                News article = new News(title, sectionId);
+                News article = new News(title, sectionId, webUrl, webPublicationDate);
                 // Add the new {@link GoogleBook} to the list of books.
                 newsList.add(article);
             }

@@ -16,51 +16,36 @@ import java.util.List;
  */
 
 public class NewsAdapter extends ArrayAdapter<News> {
-    private List<News> newsList;
 
-
-    public NewsAdapter(Context context, List<News> newsList) {
-        super(context, -1);
-        this.newsList = newsList;
+    public NewsAdapter(@NonNull Context context, List<News> newsList) {
+        super(context, 0, newsList);
     }
 
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        ViewHolder viewHolder;
-        if (convertView == null) {
-            convertView = LayoutInflater.from(getContext())
-                    .inflate(R.layout.news_list_item, parent, false);
-            //create a new instance of a @ViewHolder every time we inflate a list item
-            viewHolder = new ViewHolder(convertView);
-            convertView.setTag(viewHolder);
-
-
-        }else {
-            //ViewHolder is already inflated.
-            viewHolder = (ViewHolder) convertView.getTag();
+        View listItemView = convertView;
+        if (listItemView == null) {
+            listItemView = LayoutInflater.from(getContext()).inflate(
+                    R.layout.news_list_item, parent, false);
         }
-        News news = newsList.get(position);
-        viewHolder.sectionHolder.setText(news.getSectionName());
-        viewHolder.titleHolder.setText(news.getTitle());
 
-        return convertView;
-    }
-    @Override
-    public int getCount() {
-        return this.newsList.size();
-    }
+        // Find the book at the given position in the list of books
+        News currentNews = getItem(position);
 
-    class ViewHolder {
-        private TextView sectionHolder;
-        private TextView titleHolder;
+        // Find the TextView with title
+        TextView titleView = (TextView) listItemView.findViewById(R.id.news_title);
+        titleView.setText(currentNews.getTitle());
+        TextView sectionName = (TextView) listItemView.findViewById((R.id.section_name));
+        sectionName.setText(currentNews.getSectionName());
+        TextView dateTextView = (TextView) listItemView.findViewById(R.id.date_TextView);
+        String rawDate = currentNews.getWebPublicationDate().replace("T", " ")
+                .substring(0, Math.min(currentNews.getWebPublicationDate().length(), 16));
 
-        public ViewHolder(@NonNull View view) {
-            this.sectionHolder = (TextView)view
-                    .findViewById(R.id.section_name);
-            this.titleHolder = (TextView)view
-                    .findViewById(R.id.news_title);
-        }
+        dateTextView.setText(rawDate);
+
+        return listItemView;
     }
 }
+
 
