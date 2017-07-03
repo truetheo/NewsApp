@@ -1,2 +1,2 @@
 # NewsApp
-Udacity Project #7
+News app with searchView #8
